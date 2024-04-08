@@ -58,4 +58,11 @@ app.put("/books/:id", (req, res) => {
     res.status(200).json(books_data);
 });
 
+//Delete book
+app.delete("/books/:id", (req, res) => {
+    const index = bookSearcher(req.params.id);
+    books_data.splice(index, 1);
+    res.status(200).send("Deleted!");
+});
+
 export default app;
