@@ -1,4 +1,15 @@
 import express from "express";
+import dbConnection from "./config/dbConnect.js";
+
+const conection = await dbConnection();
+
+conection.on("error", (error) => {
+    console.error("Erro de conexão", error);
+});
+
+conection.once("open", () => {
+    console.log("Conexão bem sucedida");
+});
 
 const app = express();
 //middleware
@@ -66,3 +77,4 @@ app.delete("/books/:id", (req, res) => {
 });
 
 export default app;
+
