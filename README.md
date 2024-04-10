@@ -7,11 +7,11 @@
 ![Express.js](https://img.shields.io/badge/express.js-%23404d59.svg?style=for-the-badge&logo=express&logoColor=%2361DAFB)
 ![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)
 ![Postman](https://img.shields.io/badge/Postman-FF6C37?style=for-the-badge&logo=postman&logoColor=white)
+![MongoDB](https://img.shields.io/badge/MongoDB-%234ea94b.svg?style=for-the-badge&logo=mongodb&logoColor=white)
 <ul>
     <li><a href="#desc">Descrição</a></li>
     <li><a href="#proj-status">Status do projeto</a></li>
     <li><a href="#pre">Pré requisitos</a></li>
-    <li><a href="#features">Features</a></li>
     <li><a href="#mapa">Mapa do projeto</a></li>
     <li><a href="#tecnologias">Técnologias utilizadas</a></li>
 </ul>
@@ -34,6 +34,12 @@ você precisa ter instalado:
     <li> 
         <a href="https://expressjs.com/pt-br/starter/installing.html">Nodemon (Version 3.0.1)</a>
     </li>
+    <li> 
+        <a href="https://www.mongodb.com/pt-br">MongoDB (Latest version)</a>
+    </li>
+    <li> 
+        <a href="https://mongoosejs.com/">Mongoose (Version 7.3.4)</a>
+    </li>
 </ul>
   
 ## Mapa do projeto
@@ -45,7 +51,9 @@ você precisa ter instalado:
 ├───package.json
 ├───node-modules
 └───src
-      └─app.js
+      ├──app.js
+      └──config
+            └─dbConnect.js
 ```
 
 ## Técnologias utilizadas
