@@ -52,8 +52,11 @@ você precisa ter instalado:
 ├───node-modules
 └───src
       ├──app.js
-      └──config
-            └─dbConnect.js
+      ├───config
+      |     └─dbConnect.js
+      └──models
+            └─Book.js
+
 ```
 
 ## Técnologias utilizadas
