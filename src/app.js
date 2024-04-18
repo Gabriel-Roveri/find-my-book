@@ -1,6 +1,6 @@
 import express from "express";
 import dbConnection from "./config/dbConnect.js";
-import book from "./models/Book.js";
+import routes from "./routes/index.js";
 
 const conection = await dbConnection();
 
@@ -13,26 +13,11 @@ conection.once("open", () => {
 });
 
 const app = express();
-//middleware
-app.use(express.json());
-
-app.get("/", (req, res) => {
-    res.status(200).send("Express test");
-});
-
-app.get("/books", async (req, res) => {
-    const booksList = await book.find({});
-    res.status(200).json(booksList);
-});
+routes(app);
 
 app.get("/books/:id", (req, res) => {
     const index = bookSearcher(req.params.id);
     res.status(201).json(books_data[index]);
-});
-
-app.post("/books", (req, res) => {
-    books_data.push(req.body);
-    res.status(201).send("Done!");
 });
 
 //Changing book title
