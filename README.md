@@ -54,6 +54,11 @@ você precisa ter instalado:
       ├──app.js
       ├───config
       |     └─dbConnect.js
+      ├───routes
+      |     ├───index.js
+      |     └─bookRoutes.js
+      ├───controllers
+      |     └─bookController.js
       └──models
             └─Book.js
 
