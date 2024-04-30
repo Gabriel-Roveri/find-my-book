@@ -1,3 +1,4 @@
+import { Double } from "mongodb";
 import mongoose from "mongoose";
 
 //schema
@@ -10,7 +11,7 @@ const bookSchema = new mongoose.Schema({
     thumbnail: { type: String },
     description: { type: String },
     publish_year: { type: Number },
-    average_rating: { type: Number },
+    average_rating: { type: Double },
     num_pages: { type: Number },
     ratings_count: { type: Number }
 }, { versionKey: false });
