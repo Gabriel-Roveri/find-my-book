@@ -52,6 +52,18 @@ class BookController {
         } 
     };
 
+    //Busca por paramêtro
+    static async listBooksByCategorie(req, res) {
+        const categories = req.query.categories;
+
+        try {
+            const booksByCategorie = await book.find({ categories: categories });
+        } catch(error) {
+            res.status(200).json({message: "Error on search!"});
+        }
+    };
+
+
 };
 
 export default BookController;
