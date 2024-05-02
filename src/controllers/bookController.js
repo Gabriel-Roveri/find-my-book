@@ -2,7 +2,7 @@ import book from "../models/Book.js";
 
 class BookController {
 
-    static async listBooks(req, res) {
+    static listBooks = async (req, res) => {
         try {
             const listBooks = await book.find({});
             res.status(200).json(listBooks);
@@ -11,7 +11,7 @@ class BookController {
         } 
     };
 
-    static async listBookById(req, res) {
+    static listBookById = async (req, res) => {
         try {
             const id = req.params.id;
             const resultBook = await book.findById(id);
@@ -21,7 +21,7 @@ class BookController {
         } 
     };
 
-    static async registerBook(req, res) {
+    static registerBook = async(req, res) => {
         
         try {
             const newBook = await book.create(req.body);
@@ -32,7 +32,7 @@ class BookController {
         
     };
 
-    static async updateBook(req, res) {
+    static updateBook = async (req, res) => {
         try {
             const id = req.params.id;
             await book.findByIdAndUpdate(id, req.body);
@@ -42,7 +42,7 @@ class BookController {
         } 
     };
 
-    static async deleteBook(req, res) {
+    static deleteBook = async (req, res) => {
         try {
             const id = req.params.id;
             await book.findByIdAndDelete(id, req.body);
@@ -53,13 +53,14 @@ class BookController {
     };
 
     //Busca por paramêtro
-    static async listBooksByCategorie(req, res) {
+    static listBooksByCategorie = async (req, res) => {
         const categories = req.query.categories;
 
         try {
-            const booksByCategorie = await book.find({ categories: categories });
-        } catch(error) {
-            res.status(200).json({message: "Error on search!"});
+            const booksByCategorie = await book.find({ "categories": categories });
+            res.status(200).send(booksByCategorie);
+        } catch (error) {
+            res.status(500).json({ message: "Error on search!" });
         }
     };
 
