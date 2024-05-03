@@ -1,3 +1,4 @@
+import mongoose from "mongoose";
 import book from "../models/Book.js";
 
 class BookController {
@@ -15,10 +16,16 @@ class BookController {
         try {
             const id = req.params.id;
             const resultBook = await book.findById(id);
-            res.status(200).json(resultBook);
+
+            (resultBook !== null) ? res.status(200).json(resultBook) : res.status(404).send({ message: "Error on search!" });
+            
         } catch (error) {
-            res.status(500).json({ message: `${error.message} - Error on request!` });
+            //tratamento erro interno do servidor
+            (error instanceof mongoose.Error.CastError) ? res.status(400).send({ message: "The datum is incorrect!" }) : res.status(500).send({ message: "Internal server error!" });
+
         } 
+            
+
     };
 
     static registerBook = async(req, res) => {
@@ -58,9 +65,11 @@ class BookController {
 
         try {
             const booksByCategorie = await book.find({ "categories": categories });
-            res.status(200).send(booksByCategorie);
+
+            (booksByCategorie !== null) ? res.status(200).send(booksByCategorie) : res.status(404).send({ message: "Error on search!" });
+            
         } catch (error) {
-            res.status(500).json({ message: "Error on search!" });
+            res.status(500).send({ message: "Internal server error!" });
         }
     };
 
