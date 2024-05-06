@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 //schema
 const bookSchema = new mongoose.Schema({
     id: { type: mongoose.Schema.Types.ObjectId },
-    isbn13: { type: Number },
+    isbn13: { type: Number, require: true },
     isbn10: { type: String },
     title: { type: String, require: true },
     categories: { type: String },
