@@ -1,6 +1,7 @@
 import express from "express";
 import dbConnection from "./config/dbConnect.js";
 import routes from "./routes/index.js";
+import middlewareChooser from "./middlewares/middlewareChooser.js";
 
 const conection = await dbConnection();
 
@@ -14,6 +15,9 @@ conection.once("open", () => {
 
 const app = express();
 routes(app);
+
+//Error middleware
+app.use(middlewareChooser);
 
 export default app;
 
