@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import book from "../models/Book.js";
+import noFound from "../Errors/noFound.js";
 
 class BookController {
 
@@ -17,7 +18,7 @@ class BookController {
             const id = req.params.id;
             const resultBook = await book.findById(id);
 
-            resultBook !== null ? res.status(200).json(resultBook) : res.status(404).send({ message: "Error on search!" });
+            resultBook !== null ? res.status(200).json(resultBook) : next(new noFound("The ID not exist!"));
             
         } catch (error) {
             //error middleware
