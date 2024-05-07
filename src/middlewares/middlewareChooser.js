@@ -1,23 +1,22 @@
 import mongoose from "mongoose";
+import BaseError from "../Errors/baseError.js";
+import incorrectReq from "../Errors/IncorrectReq.js";
+import ValidationError from "../Errors/ValidationError.js";
+import noFound from "../Errors/noFound.js";
 
 function middlewareChooser(error, req, res, next) {
     //Server error streatment
     if (error instanceof mongoose.Error.CastError) {
 
-        res.status(400).send({ message: "The datum is incorrect!" });
+        new incorrectReq().sendResponse(res);
+    } else if (error instanceof mongoose.Error.ValidationError) {   
 
-    } else if (error instanceof mongoose.Error.ValidationError) {
+        new ValidationError(error).sendResponse(res);
+    } else if (error instanceof noFound) {
+        error.sendResponse(res);
+    }else {
         
-        const errorMessage = Object.values(error.errors)
-            .map(error => error.message)
-            .join(";");
-        
-        res.status(400).send({ message: `Errors found: ${errorMessage}` });
-
-    } else {
-        
-        res.status(500).send({ message: "Internal server error!" });
-
+        new BaseError().sendResponse(res);
     };
 };
 
