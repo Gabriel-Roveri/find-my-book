@@ -57,6 +57,8 @@ você precisa ter instalado:
       ├───routes
       |     ├───index.js
       |     └─bookRoutes.js
+      ├───middlewares
+      |     └─middlewareChooser.js
       ├───controllers
       |     └─bookController.js
       └──models
