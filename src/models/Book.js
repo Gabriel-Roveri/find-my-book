@@ -3,9 +3,10 @@ import mongoose from "mongoose";
 //schema
 const bookSchema = new mongoose.Schema({
     id: { type: mongoose.Schema.Types.ObjectId },
-    isbn13: { type: Number, require: true },
+    //Validação nativa Mongoose
+    isbn13: { type: Number, require: [true, "ISBN is mandatory!"] },
     isbn10: { type: String },
-    title: { type: String, require: true },
+    title: { type: String, require: [true, "Title is mandatory!"] },
     categories: { type: String },
     thumbnail: { type: String },
     description: { type: String },
