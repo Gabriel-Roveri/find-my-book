@@ -16,9 +16,9 @@ conection.once("open", () => {
 
 const app = express();
 routes(app);
-
+//Middleware erro não encontrado
 app.use(middleware404);
-//Error middleware
+//Middleware manipulador
 app.use(middlewareChooser);
 
 
