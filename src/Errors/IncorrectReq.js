@@ -1,8 +1,8 @@
 import BaseError from "./baseError.js";
 
 class IncorrectReq extends BaseError {
-    constructor() {
-        super("The datum is incorrect!", 400);
+    constructor(message = "The datum is incorrect!") {
+        super(message, 400);
     };
 };
 

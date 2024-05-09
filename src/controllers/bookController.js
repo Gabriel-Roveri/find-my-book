@@ -1,5 +1,4 @@
-import mongoose from "mongoose";
-import book from "../models/Book.js";
+import { book } from "../models/index.js";
 import noFound from "../Errors/noFound.js";
 
 class BookController {
