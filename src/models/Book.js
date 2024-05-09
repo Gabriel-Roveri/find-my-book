@@ -4,9 +4,15 @@ import mongoose from "mongoose";
 const bookSchema = new mongoose.Schema({
     id: { type: mongoose.Schema.Types.ObjectId },
     //Validação nativa Mongoose
-    isbn13: { type: Number, require: [true, "ISBN is mandatory!"] },
+    isbn13: {
+        type: Number,
+        required: [true, "ISBN is mandatory!"]
+    },
     isbn10: { type: String },
-    title: { type: String, require: [true, "Title is mandatory!"] },
+    title: {
+        type: String,
+        required: [true, "Title is mandatory!"]
+    },
     categories: { type: String },
     thumbnail: { type: String },
     description: { type: String },
@@ -14,8 +20,8 @@ const bookSchema = new mongoose.Schema({
     average_rating: { type: Number },
     num_pages: { type: Number },
     ratings_count: { type: Number }
-}, { versionKey: false });
+});
 
-const book = mongoose.model("books", bookSchema);
+const book = mongoose.model("book", bookSchema);
 
 export default book;
