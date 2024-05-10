@@ -58,10 +58,18 @@ você precisa ter instalado:
       |     ├───index.js
       |     └─bookRoutes.js
       ├───middlewares
+      |     ├─middleware404.js
       |     └─middlewareChooser.js
+      ├───errors
+      |     ├───BaseError.js
+      |     ├───IncorrectReq.js
+      |     ├───noFound.js
+      |     └─ValidationError.js
       ├───controllers
       |     └─bookController.js
       └──models
+            ├───globalValidator.js
+            ├───index.js
             └─Book.js
 
 ```
