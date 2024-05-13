@@ -59,13 +59,22 @@ class BookController {
     };
 
     //Busca por paramêtro
-    static listBooksByCategorie = async (req, res, next) => {
-        const categories = req.query.categories;
+    static listBooksByFilter = async (req, res, next) => {
 
         try {
-            const booksByCategorie = await book.find({ "categories": categories });
+            const { categories, title, min_pages, max_pages } = req.query;
 
-            booksByCategorie !== null ? res.status(200).send(booksByCategorie) : res.status(404).send({ message: "Error on search!" });
+            const search = {};
+
+            //filtros
+            if (categories) search.categories = { $regex: categories, $options: "i" };
+            if (title) search.title = { $regex: title, $options: "i" };
+            if (min_pages) search.num_pages = { $gte: min_pages };
+            if (max_pages) search.num_pages = { $lte: max_pages };
+
+            const resultBook = await book.find(search);
+
+            resultBook !== null ? res.status(200).send(resultBook) : res.status(404).send({ message: "Error on search!" });
             
         } catch (error) {
             next(error);
