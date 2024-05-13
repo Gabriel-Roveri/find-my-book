@@ -62,15 +62,8 @@ class BookController {
     static listBooksByFilter = async (req, res, next) => {
 
         try {
-            const { categories, title, min_pages, max_pages } = req.query;
-
-            const search = {};
-
-            //filtros
-            if (categories) search.categories = { $regex: categories, $options: "i" };
-            if (title) search.title = { $regex: title, $options: "i" };
-            if (min_pages) search.num_pages = { $gte: min_pages };
-            if (max_pages) search.num_pages = { $lte: max_pages };
+            
+            const search = await searchLoader(req.query);
 
             const resultBook = await book.find(search);
 
@@ -84,4 +77,19 @@ class BookController {
 
 };
 
+async function searchLoader(params) {
+
+    const { categories, title, min_pages, max_pages } = params;
+
+    const search = {};
+
+    //filtros
+    if (categories) search.categories = { $regex: categories, $options: "i" };
+    if (title) search.title = { $regex: title, $options: "i" };
+
+    if (min_pages) search.num_pages = { $gte: min_pages };
+    if (max_pages) search.num_pages = { $lte: max_pages };
+
+    return search
+}
 export default BookController;
