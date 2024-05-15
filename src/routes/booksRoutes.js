@@ -1,10 +1,11 @@
 import express from "express";
 import BookController from "../controllers/bookController.js";
+import pagination from "../middlewares/pagination.js";
 
 const routes = express.Router();
-
+                                                                                    
 routes
-    .get("/books", BookController.listBooks)
+    .get("/books", BookController.listBooks, pagination) //adicionando middleware pagination V
     .get("/books/search", BookController.listBooksByFilter)
     .get("/books/:id", BookController.listBookById)
     .post("/books", BookController.registerBook)
