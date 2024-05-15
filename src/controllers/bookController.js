@@ -1,28 +1,15 @@
 import { book } from "../models/index.js";
 import noFound from "../Errors/noFound.js";
-import IncorrectReq from "../Errors/IncorrectReq.js";
 
 class BookController {
 
     static listBooks = async (req, res, next) => {
         try {
-            //Paginação
-            let { total = 5, page = 1 } = req.query;
+            const searchBooks = book.find();
+            //armazenando informações para transferir a outro middleware
+            req.result = searchBooks;
 
-            //Verificação
-            total = parseInt(total);
-            page = parseInt(page);
-
-            if (total > 0 && page > 0) {
-                const listBooks = await book.find()
-                .skip((page - 1) * total)
-                .limit(total);
-            
-                res.status(200).json(listBooks);
-            } else {
-                next(new IncorrectReq());
-            };
-            
+            next();
         } catch (error) {
             next(error);
         } 
